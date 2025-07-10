@@ -80,9 +80,9 @@ export default function BlockPage() {
         // Fetch transaction details
         const txPromises = blockData.tx.slice(0, 20).map(async (txid) => {
           try {
-            // Skip empty transaction IDs
-            if (!txid || txid.trim() === '') {
-              console.warn('Skipping empty transaction ID');
+            // Ensure txid is a string and not empty
+            if (typeof txid !== 'string' || txid.trim() === '') {
+              console.warn('Skipping invalid transaction ID', txid);
               return null;
             }
             return await satoxClient.getTransaction(txid);
