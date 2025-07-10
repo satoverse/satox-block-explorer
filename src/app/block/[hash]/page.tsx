@@ -217,17 +217,17 @@ export default function BlockPage() {
         </div>
 
         {/* Block Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-8 border border-gray-200 dark:border-gray-700">
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Block #{block.height}
               </h1>
-              <p className="text-gray-500 mt-1">
+              <p className="text-gray-500 dark:text-gray-400 mt-1">
                 {formatTime(block.time)}
               </p>
             </div>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
               {block.confirmations} confirmations
             </span>
           </div>
@@ -235,47 +235,47 @@ export default function BlockPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <span className="text-sm font-medium text-gray-500">Hash:</span>
-                <p className="text-sm text-gray-900 font-mono break-all">
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Hash:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100 font-mono break-all">
                   {block.hash}
                 </p>
               </div>
               <div>
-                <span className="text-sm font-medium text-gray-500">Merkle Root:</span>
-                <p className="text-sm text-gray-900 font-mono break-all">
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Merkle Root:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100 font-mono break-all">
                   {block.merkleroot}
                 </p>
               </div>
               <div>
-                <span className="text-sm font-medium text-gray-500">Previous Block:</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Previous Block:</span>
                 {block.previousblockhash ? (
                   <Link
                     href={`/block/${block.previousblockhash}`}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-mono break-all block"
+                    className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-mono break-all block"
                   >
                     {block.previousblockhash}
                   </Link>
                 ) : (
-                  <p className="text-sm text-gray-400">Genesis Block</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500">Genesis Block</p>
                 )}
               </div>
             </div>
             <div className="space-y-4">
               <div>
-                <span className="text-sm font-medium text-gray-500">Size:</span>
-                <p className="text-sm text-gray-900">{block.size.toLocaleString()} bytes</p>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Size:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100">{block.size.toLocaleString()} bytes</p>
               </div>
               <div>
-                <span className="text-sm font-medium text-gray-500">Difficulty:</span>
-                <p className="text-sm text-gray-900">{block.difficulty.toFixed(2)}</p>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Difficulty:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100">{block.difficulty.toFixed(2)}</p>
               </div>
               <div>
-                <span className="text-sm font-medium text-gray-500">Nonce:</span>
-                <p className="text-sm text-gray-900">{block.nonce}</p>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Nonce:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100">{block.nonce}</p>
               </div>
               <div>
-                <span className="text-sm font-medium text-gray-500">Bits:</span>
-                <p className="text-sm text-gray-900">{block.bits}</p>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Bits:</span>
+                <p className="text-sm text-gray-900 dark:text-gray-100">{block.bits}</p>
               </div>
             </div>
           </div>
@@ -283,43 +283,43 @@ export default function BlockPage() {
 
         {/* Transactions */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Transactions ({block.tx.length})
           </h2>
           
           <div className="space-y-4">
             {transactions.map((tx, index) => (
-              <div key={tx.txid} className="bg-white rounded-lg shadow-md p-6">
+              <div key={tx.txid} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                       Transaction #{index + 1}
                     </h3>
-                    <p className="text-sm text-gray-500 font-mono">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-mono">
                       {formatHash(tx.txid)}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-500">Size</p>
-                    <p className="text-sm font-medium">{tx.size} bytes</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Size</p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{tx.size} bytes</p>
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <span className="text-sm font-medium text-gray-500">Inputs:</span>
-                    <p className="text-sm text-gray-900">{tx.vin.length}</p>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Inputs:</span>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">{tx.vin.length}</p>
                   </div>
                   <div>
-                    <span className="text-sm font-medium text-gray-500">Outputs:</span>
-                    <p className="text-sm text-gray-900">{tx.vout.length}</p>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Outputs:</span>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">{tx.vout.length}</p>
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <Link
                     href={`/tx/${tx.txid}`}
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
                   >
                     View Transaction Details →
                   </Link>
@@ -330,7 +330,7 @@ export default function BlockPage() {
           
           {block.tx.length > 20 && (
             <div className="mt-6 text-center">
-              <p className="text-gray-500">
+              <p className="text-gray-500 dark:text-gray-400">
                 Showing first 20 transactions of {block.tx.length} total
               </p>
             </div>
