@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { satoxClient } from '@/lib/satox-client';
 
 function getInitialTheme() {
   if (typeof window !== 'undefined') {
@@ -17,6 +18,7 @@ export default function Header() {
   const [search, setSearch] = useState('');
   const [theme, setTheme] = useState('light');
   const [mounted, setMounted] = useState(false);
+  const [blockHeight, setBlockHeight] = useState<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -35,6 +37,25 @@ export default function Header() {
     }
     localStorage.setItem('theme', theme);
   }, [theme, mounted]);
+
+  // Fetch block height
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchBlockHeight() {
+      try {
+        const info = await satoxClient.getInfo();
+        if (isMounted) setBlockHeight(info.blocks);
+      } catch (err) {
+        if (isMounted) setBlockHeight(null);
+      }
+    }
+    fetchBlockHeight();
+    const interval = setInterval(fetchBlockHeight, 30000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [mounted]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,7 +107,7 @@ export default function Header() {
             </div>
             {/* Block Height */}
             <div className="text-sm text-gray-600 dark:text-gray-300">
-              Block: 23,039
+              Block: {blockHeight !== null ? blockHeight.toLocaleString() : '...'}
             </div>
             {/* Dark Mode Toggle */}
             {mounted && (
