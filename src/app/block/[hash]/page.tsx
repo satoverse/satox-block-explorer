@@ -217,7 +217,7 @@ export default function BlockPage() {
         </div>
 
         {/* Block Header */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-8 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
           <div className="flex justify-between items-start mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
